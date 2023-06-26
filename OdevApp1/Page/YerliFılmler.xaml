@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OdevApp1.Page.YerliFılmler"
+             xmlns:icons="clr-namespace:OdevApp1.IconHelper"
+             BackgroundColor="#1e1e1f"
+             Title="YerliFılmler">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="SourceColor">#f7f7f7</Color>
+            <Color x:Key="BoxColor">#db2424</Color>
+            <Color x:Key="FrameColor">Transparent</Color>
+            <Color x:Key="TumuLabelColor">#b0b2b3</Color>
+
+            <Style x:Key="SourceTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource SourceColor}"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Padding" Value="75,0,0,0"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="FontSize" Value="Large" />
+            </Style>
+            <Style x:Key="BoxStyle" TargetType="BoxView">
+                <Setter Property="Color" Value="{StaticResource BoxColor}"/>
+                <Setter Property="WidthRequest" Value="500"/>
+                <Setter Property="Margin" Value="75,0,0,0"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="CornerRadius" Value="20" />
+                <Setter Property="HeightRequest" Value="5" />
+            </Style>
+            <Style x:Key="BordertStyle" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="{StaticResource FrameColor}"/>
+                <Setter Property="Padding" Value="0,0,0,20"/>
+                <Setter Property="Margin" Value="12"/>
+                <Setter Property="StrokeShape" Value="RoundRectangle 30" />
+                <Setter Property="WidthRequest" Value="250" />
+                <Setter Property="HeightRequest" Value="300" />
+                <Setter Property="Stroke" Value="{StaticResource BoxColor}" />
+            </Style>
+            <Style x:Key="BorderTextStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <VerticalStackLayout 
+            Padding="0,30,0,0"
+            >
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Margin="300,0,0,0" TextColor="White" Text="Hesaptan Çık" BackgroundColor="#cc0000" Clicked="cıkısButton" />
+                    <Entry x:Name="searchEntry" Grid.Column="1" TextColor="WhiteSmoke" WidthRequest="700" HorizontalTextAlignment="Center" Placeholder="Film Arayın..." TextChanged="searchEntry_TextChanged" Completed="AramaButton" BackgroundColor="#5f6163" PlaceholderColor="#f7f7f7" />
+                    <Button Grid.Column="2" Margin="0,0,300,0" TextColor="White" Text="Profil" BackgroundColor="#2583ba" Clicked="profilButton" />
+                </Grid>
+
+
+                <ListView x:Name="resultsListView" Grid.Row="1" Margin="325,0,325,0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0" Text="{Binding FılmAdı}" TextColor="#f7f7f7" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0,20,0,0" Spacing="20">
+                <Border x:Name="AnaSayfaBorder" StrokeShape="RoundRectangle 55,55,55,55"
+            HeightRequest="60">
+                    <Button Text="Ana Sayfa"
+                TextColor="#b0b2b3"
+                Clicked="AnasayfaButton"
+                            BackgroundColor="Transparent"
+                CommandParameter="AnaSayfa" />
+                </Border>
+
+                <Border x:Name="YerliFilmBorder"  StrokeShape="RoundRectangle 55,55,55,55"
+            HeightRequest="60">
+                    <Button Text="Yerli Film"
+                TextColor="#b0b2b3"
+                BackgroundColor="Transparent"
+                />
+                </Border>
+
+                <Border x:Name="YabanciFilmBorder"  StrokeShape="RoundRectangle 55,55,55,55" 
+            HeightRequest="60" >
+                    <Button Text="Yabancı Film"
+                TextColor="#b0b2b3"
+                BackgroundColor="Transparent"
+                Clicked="YabancıFılmButton"
+                CommandParameter="YabanciFilm" />
+                </Border>
+            </StackLayout>
+
+
+            <StackLayout>
+                <Grid Padding="0,25,0,0">
+                    <Label Text="Yerli Filmler" Style="{StaticResource SourceTextStyle}" />
+                </Grid>
+                <BoxView Style="{StaticResource BoxStyle}" />
+                <StackLayout Orientation="Vertical">
+                    <CollectionView x:Name="collectionViewFilmler" ItemsSource="{Binding Filmler}" Margin="60,0,60,0">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="5" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border  Style="{StaticResource BordertStyle}">
+                                    <Border.Content>
+                                        <StackLayout>
+                                            <Button ImageSource="{Binding FotoUrl}" Margin="0,20,0,0" BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="250" WidthRequest="300" Clicked="VeriTıkla"/>
+                                            <Label Text="{Binding FılmAdı}" Style="{StaticResource BorderTextStyle}"/>
+                                        </StackLayout>
+                                    </Border.Content>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </StackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

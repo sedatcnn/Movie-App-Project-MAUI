@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OdevApp1.Page.Profil"
+             xmlns:icons="clr-namespace:OdevApp1.IconHelper"
+             BackgroundColor="#1e1e1f"
+             Title="Profil">
+    <ScrollView>
+        <Grid>
+            <StackLayout Padding="120" HorizontalOptions="Center">
+               
+                <Frame
+                    Padding="0"
+                    WidthRequest="600"
+                    BorderColor="Transparent"
+                    CornerRadius="50"
+                    HeightRequest="520">
+                    <Grid
+                        BackgroundColor="#f8f8fa"
+                        Padding="20,50,20,0"
+                        HorizontalOptions="FillAndExpand"
+                        RowSpacing="30 "
+                        VerticalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+
+                            </Grid.ColumnDefinitions>
+                            <Label
+                            Grid.Column="1" 
+                            FontAttributes="Bold"
+                            FontSize="24"
+                            HorizontalOptions="CenterAndExpand"
+                            Text="Hesap Bilgileri"
+                            TextColor="Black" />
+                            <Button
+                            Margin="10,0,30,0"
+                            Padding="0,0,0,7"
+                            WidthRequest="20"
+                            HeightRequest="8"
+                            Grid.Row="0"
+                            FontSize="30"
+                            BackgroundColor="#e5e6eb"
+                            CornerRadius="30"
+                            TextColor="Black"
+                                Clicked="geriButton"
+                            Text="{x:Static icons:FAIconHelper.AngleLeft}"/>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                    Text="Kullanıcı Adı: "
+                                    TextColor="Black"
+                                    Margin="20,20,10,0"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Start" />
+                            <Label
+                                    x:Name="kullanıcıAdi"
+                                    Grid.Column="1"
+                                    Text="{Binding .} "
+                                    FontAttributes="Bold"
+                                    TextColor="Black"
+                                    Margin="20,20,10,0"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Start" />
+
+
+                        </Grid>
+
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                    Text="Şifre :"
+                                    TextColor="Black"
+                                    Margin="20,20,10,0"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Start" />
+                            <Label 
+                                    x:Name="Sifre"
+                                    Grid.Column="1"
+                                    Text="{Binding .}"
+                                    TextColor="Black"
+                                    FontAttributes="Bold"
+                                    Margin="20,20,10,0"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Start" />
+                            
+                        </Grid>
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                    Text="Doğum Tarihi :"
+                                    TextColor="Black"
+                                    Margin="20,20,10,0"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Start" />
+                            
+                            <Label  
+                                    x:Name="dogumTarihi"
+                                    Grid.Column="1"
+                                    Text="{Binding .}"
+                                    TextColor="Black"
+                                    FontAttributes="Bold"
+                                    Margin="20,20,10,0"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Start" />
+                     
+                        </Grid> 
+                        <Grid Grid.Row="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                    Text="Cinsiyet :"
+                                    TextColor="Black"
+                                    Margin="20,20,10,0"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Start" />
+                            <Label
+                                    x:Name="cinsiyet"
+                                    Grid.Column="1"
+                                    Text="{Binding .}"
+                                    TextColor="Black"
+                                    FontAttributes="Bold"
+                                    Margin="20,20,10,0"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Start" />
+                        </Grid>
+                        <Grid Grid.Row="5" Margin="0,30,0,0" ColumnSpacing="20" HorizontalOptions="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+
+                            </Grid.ColumnDefinitions>
+                            <Button
+                            WidthRequest="120"
+                            BackgroundColor="#2583ba"
+                            CornerRadius="20"
+                            TextColor="#e5e6eb"
+                            Text="Şifreyi Değiştir"
+                                Clicked="ParolaDegistir"
+                                />
+
+                            <Button
+                            
+                            WidthRequest="120"
+                            Grid.Column="1  "
+                            BackgroundColor="#cc0000"
+                            TextColor="#e5e6eb"
+                            CornerRadius="20"
+                            Text="Hesabı Sil" 
+                                Clicked="HesapSil"/>
+                        </Grid>
+                       
+                       
+                    </Grid>
+                </Frame>
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

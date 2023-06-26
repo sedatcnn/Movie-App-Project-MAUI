@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OdevApp1.Page.FılmDetay.OlumluSayfa"
+             Title="OlumluSayfa" 
+             xmlns:icons="clr-namespace:OdevApp1.IconHelper"
+             BackgroundColor="#1e1e1f"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="CoverContainerStyle" TargetType="Border">
+                <Setter Property="StrokeShape" Value="RoundRectangle 0, 0, 24, 24"/>
+                <Setter Property="Stroke" Value="Transparent"/>
+                <Setter Property="StrokeThickness" Value="0" />
+            </Style>
+
+
+            <Style x:Key="RatingContainerStyle" TargetType="Border">
+                <Setter Property="StrokeShape" Value="RoundRectangle 48, 0, 48, 0" />
+                <Setter Property="StrokeThickness" Value="0" />
+                <Setter Property="HeightRequest" Value="80" />
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="Padding" Value="12" />
+                <Setter Property="Margin" Value="800, 450, 0, 0" />
+            </Style>
+
+            <Style x:Key="RatingIconStyle" TargetType="Image">
+                <Setter Property="HeightRequest" Value="24" />
+                <Setter Property="WidthRequest" Value="24" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+
+
+            <Style x:Key="MovieTitleStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="50" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style x:Key="MovieInfoTextStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Micro" />
+                <Setter Property="Opacity" Value="0.75" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="SectionTitleStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="30" />
+                <Setter Property="FontAttributes" Value="None" />
+                <Setter Property="Margin" Value="0, 24, 0, 0" />
+            </Style>
+
+            <Style x:Key="SummaryTextStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="TextColor" Value="DarkGray" />
+                <Setter Property="Margin" Value="0, 12" />
+            </Style>
+            <Style x:Key="InfoTitleStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Start" />
+            </Style>
+
+            <Style x:Key="InfoSubTitleStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="8" />
+                <Setter Property="TextColor" Value="Gray" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Start" />
+            </Style>
+            <Style x:Key="PaddingContainerStyle" TargetType="Layout">
+                <Setter Property="Padding" Value="65,0,65,20" />
+            </Style>
+
+            <Style x:Key="CategoryContainerStyle" TargetType="Border">
+                <Setter Property="StrokeShape" Value="RoundRectangle 24" />
+                <Setter Property="WidthRequest" Value="60" />
+                <Setter Property="Padding" Value="0, 8, 0, 0" />
+            </Style>
+
+            <Style x:Key="CategoryTextStyle" TargetType="Label">
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>
+            <Style x:Key="CategoriesStyle" TargetType="CollectionView">
+                <Setter Property="Margin" Value="0, 12" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <Grid 
+        RowDefinitions=" 500, Auto, Auto, *">
+            <Grid>
+                <Border Style="{StaticResource CoverContainerStyle}">
+                    <StackLayout>
+                        <Image Source="olumlu_afis.jpg" Aspect="AspectFill" />
+                    </StackLayout>
+                </Border>
+            </Grid>
+            <Button
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                Margin="10,10,0,0"
+                Padding="0,0,0,7"
+                WidthRequest="20"
+                HeightRequest="8"
+                Grid.Row="0"
+                FontSize="30"
+                BorderColor="Gray"
+                BackgroundColor="Transparent"
+                CornerRadius="30"
+                TextColor="White"
+                Clicked="geriButton"
+                Text="{x:Static icons:FAIconHelper.AngleLeft}"/>
+            <Grid
+            Grid.Row="1"
+            ColumnDefinitions="Auto, Auto, Auto, *"
+            RowDefinitions="Auto, Auto, *"
+            Margin="0, 80, 0, 0"
+            Style="{StaticResource PaddingContainerStyle}">
+                <!-- Film başlığı -->
+                <CollectionView x:Name="collectionBaslık"
+                Grid.ColumnSpan="3"
+                Grid.Row="0"
+                ItemsSource="{Binding Filmler}"
+                VerticalOptions="Center">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label
+                    Text="{Binding FılmAdı}"
+                    Style="{StaticResource MovieTitleStyle}"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Film bilgileri -->
+                <CollectionView x:Name="collectionAd"
+                Grid.Row="1"
+                Grid.Column="0"
+                ItemsSource="{Binding Filmler}"
+                VerticalOptions="Center">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Label
+                        Text="{Binding YayınTarihi}"
+                        Style="{StaticResource MovieInfoTextStyle}"/>
+                                <Label
+                        Text="{Binding FılmUzunlugu}"
+                        Style="{StaticResource MovieInfoTextStyle}"/>
+                                <Label
+                        Text="{Binding EklenmeTarihi}"
+                        Style="{StaticResource MovieInfoTextStyle}"/>
+
+                            </StackLayout>
+                        </DataTemplate>
+
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+                <CollectionView x:Name="collectionTur"
+                Grid.ColumnSpan="4" 
+                Grid.Row="2"
+                ItemsSource="{Binding turListesi}"
+                >
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout
+                        Orientation="Horizontal"
+                        ItemSpacing="6"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border WidthRequest="100"
+                                 Style="{StaticResource CategoryContainerStyle}">
+                                <Label 
+                                  Text="{Binding .}"
+                                    Style="{StaticResource CategoryTextStyle}"/>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <BoxView
+                Grid.Row="2"
+                Grid.ColumnSpan="4"
+                Margin="0,30,0,-10"
+                HeightRequest="1" WidthRequest="400"
+                HorizontalOptions="Center"
+                BackgroundColor="Gray" />
+            </Grid>
+
+
+            <Grid Grid.Row="3" RowDefinitions="Auto, *"
+      Style="{StaticResource PaddingContainerStyle}">
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Yönetmen" Style="{StaticResource SectionTitleStyle}"
+               HorizontalOptions="Start"
+               Grid.Column="0" />
+
+                    <Label Text="Oyuncular" Style="{StaticResource SectionTitleStyle}"
+               HorizontalOptions="CenterAndExpand"
+               Grid.Column="1" />
+
+                    <Label Text="Senarist" Style="{StaticResource SectionTitleStyle}"
+               HorizontalOptions="End"
+               Grid.Column="2" />
+                </Grid>
+
+                <BoxView HeightRequest="1" BackgroundColor="Gray" WidthRequest="400"
+             HorizontalOptions="Center"
+             Margin="0,0,0,80" />
+
+                <CollectionView x:Name="collectionOyuncular"
+                    Grid.Row="1"
+                    ItemsSource="{Binding Filmler}"
+                    VerticalOptions="Center">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding Yonetmen}" Style="{StaticResource SummaryTextStyle}"
+                           HorizontalOptions="Start"
+                           Grid.Column="0" />
+
+                                <Label Text="{Binding Oyuncular}" Style="{StaticResource SummaryTextStyle}"
+                           HorizontalOptions="CenterAndExpand"
+                           Grid.Column="1" />
+
+                                <Label Text="{Binding Senarist}" Style="{StaticResource SummaryTextStyle}"
+                           HorizontalOptions="End"
+                           Grid.Column="2" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+
+
+
+
+            <Grid
+                 Grid.Row="2"
+                  RowDefinitions="Auto, *"
+                    Style="{StaticResource PaddingContainerStyle}">
+                <Label 
+                    Text="Özet"
+                    Style="{StaticResource SectionTitleStyle}" />
+
+                <CollectionView
+                   Grid.Row="1" x:Name="collectionOzet"
+                   ItemsSource="{Binding Filmler}"
+                      VerticalOptions="Start">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Label
+                    Text="{Binding Acıklama}"
+                    Style="{StaticResource SummaryTextStyle}" />
+
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+
+
+            <Border Grid.Row="0"
+            Grid.RowSpan="4"
+            Style="{StaticResource RatingContainerStyle}">
+                <CollectionView x:Name="collectionPuan" ItemsSource="{Binding Filmler}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*, *, *">
+                                <Grid RowSpacing="0" RowDefinitions="*, Auto, Auto">
+                                    <Image Source="staryellow.png" Style="{StaticResource RatingIconStyle}" />
+                                    <Label Grid.Row="1" Text="{Binding KullanıcıPuanı}" Style="{StaticResource InfoTitleStyle}" />
+                                    <Label Grid.Row="2" Text="IMDB" Style="{StaticResource InfoSubTitleStyle}"/>
+                                </Grid>
+                                <Grid Grid.Column="1" RowSpacing="0" RowDefinitions="*, Auto, Auto">
+                                    <Image Source="staroutline.png" Style="{StaticResource RatingIconStyle}" />
+                                    <Label Grid.Row="1" Text="Puanla" Style="{StaticResource InfoTitleStyle}" />
+                                    <Label Grid.Row="2" Text=" " Style="{StaticResource InfoSubTitleStyle}"/>
+                                </Grid>
+                                <Grid RowSpacing="0" RowDefinitions="*, Auto, Auto" Grid.Column="2">
+                                    <Image Source="eye.png" Style="{StaticResource RatingIconStyle}" />
+                                    <Label Grid.Row="1" Text="{Binding İzlenmeSayısı}" Style="{StaticResource InfoTitleStyle}" />
+                                    <Label Grid.Row="2" Text="İzlenme Sayısı" Style="{StaticResource InfoSubTitleStyle}"/>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Border>
+        </Grid>
+    </ScrollView>
+</ContentPage>
